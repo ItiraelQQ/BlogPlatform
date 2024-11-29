@@ -16,13 +16,14 @@ namespace BlogPlatformAPI.Controllers
         {
             _context = context;
         }
-        [Authorize]
+        
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
         {
             return await _context.Posts.ToListAsync();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Post>> CreatePost(Post post)
         {

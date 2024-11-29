@@ -7,6 +7,7 @@ using System;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 
 namespace BlogPlatformAPI.Controllers
 {
@@ -17,12 +18,14 @@ namespace BlogPlatformAPI.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IConfiguration _configuration;
+        private readonly IWebHostEnvironment _webHostEnvironment;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, IConfiguration configuration, IWebHostEnvironment webHostEnvironment)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _configuration = configuration;
+            _webHostEnvironment = webHostEnvironment;
         }
 
         // Регистрация нового пользователя
@@ -32,6 +35,7 @@ namespace BlogPlatformAPI.Controllers
             var user = new ApplicationUser
             {
                 UserName = request.Username,
+                AvatarUrl = "/uploads/avatars/default.jpg"
             };
 
             var result = await _userManager.CreateAsync(user, request.Password);
@@ -99,10 +103,56 @@ namespace BlogPlatformAPI.Controllers
 
             var profileData = new
             {
-                Username = user.UserName
+                Username = user.UserName,
+                AvatarUrl = user.AvatarUrl,
             };
 
             return Ok(profileData);
+        }
+
+        [Authorize]
+        [HttpPost("upload-avatar")]
+        public async Task<IActionResult> UploadAvatar(IFormFile file)
+        {
+            try
+            {
+                if (file == null || file.Length == 0)
+                {
+                    return BadRequest("No file selected.");
+                }
+
+                var username = User.Identity.Name;
+                var user = await _userManager.FindByNameAsync(username);
+
+                if (user == null)
+                {
+                    return NotFound();
+                }
+
+                var uploadsFolder = Path.Combine(_webHostEnvironment.ContentRootPath, "uploads", "avatars");
+
+                if (!Directory.Exists(uploadsFolder))
+                {
+                    Directory.CreateDirectory(uploadsFolder);
+                }
+
+                var fileName = Guid.NewGuid().ToString() + Path.GetExtension(file.FileName);
+                var filePath = Path.Combine(uploadsFolder, fileName);
+
+                using (var fileStream = new FileStream(filePath, FileMode.Create))
+                {
+                    await file.CopyToAsync(fileStream);
+                }
+
+                user.AvatarUrl = $"/uploads/avatars/{fileName}";
+                await _userManager.UpdateAsync(user);
+
+                return Ok(new { AvatarUrl = user.AvatarUrl });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while uploading avatar." });
+            }
         }
 
     }

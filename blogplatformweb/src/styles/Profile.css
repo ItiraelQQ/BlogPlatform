@@ -1,0 +1,97 @@
+/* Profile.css */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background-color: #f4f4f4; /* Светлый фон */
+    min-height: 100vh; /* Растянуть на всю высоту */
+    font-family: 'Arial', sans-serif;
+}
+
+h2 {
+    font-size: 28px;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.profile-info {
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    width: 100%;
+    max-width: 400px;
+}
+
+.profile-avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #418af4;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.profile-avatar:hover {
+    transform: scale(1.1);
+}
+
+.avatar-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.uploading-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: #418af4;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.file-input {
+    display: none; /* Скрываем стандартный input */
+}
+
+.no-avatar {
+    color: #999;
+    font-size: 14px;
+}
+
+.profile-info p {
+    margin: 10px 0;
+    color: #555;
+    font-size: 18px;
+}
+
+.profile-info button {
+    background-color: #418af4;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+.profile-info button:hover {
+    background-color: #356bb3;
+}
+
+.profile-info button:active {
+    background-color: #2a5290;
+}
