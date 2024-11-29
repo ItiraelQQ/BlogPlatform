@@ -1,5 +1,6 @@
 ﻿using BlogPlatformAPI.Data;
 using BlogPlatformAPI.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,15 +16,15 @@ namespace BlogPlatformAPI.Controllers
         {
             _context = context;
         }
-
+        [Authorize]
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
         {
-            return await _context.Posts.Include(p => p.Comments).ToListAsync();
+            return await _context.Posts.ToListAsync();
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreatePost(Post post)
+        public async Task<ActionResult<Post>> CreatePost(Post post)
         {
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
