@@ -7,8 +7,8 @@ import '../styles/CreatePost.css';
 const CreatePost = () => {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState(''); // Для HTML-содержимого
-  const username = useState('');
-  const userId = useState('');
+  const [username, setUsername] = useState('');
+  const [userId, setUserId] = useState('');
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -18,7 +18,7 @@ const CreatePost = () => {
 
     const postData = {
       title,
-      content, // HTML из редактора
+      content, 
       createdAt: new Date().toISOString(),
       authorName: username,
       authorId: userId,

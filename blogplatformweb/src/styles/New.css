@@ -2,27 +2,29 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    height: 100vh;
+    justify-content: flex-start;
     padding: 20px;
-  }
-  
-  h1 {
+    padding-top: 60px; /* Высота навбара */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1 {
     font-size: 28px;
     font-weight: bold;
     color: #C9CCCF;
     margin-bottom: 20px;
-  }
-  
-  .posts-list {
+}
+
+.posts-list {
     display: flex;
     flex-direction: column;
     gap: 20px;
-    width: 100%;
-    max-width: 800px; /* Максимальная ширина контейнера */
-  }
-  
-  .post-card {
+    width: 700px;
+    max-width: 800px;
+}
+
+.post-card {
     background-color: #232324;
     padding: 20px;
     border-radius: 10px;
@@ -30,25 +32,36 @@
     display: flex;
     flex-direction: column;
     gap: 10px;
-  }
-  
-  .post-title {
+    align-items: center; /* Это центрирует элементы по горизонтали */
+}
+
+.post-title {
     font-size: 22px;
     font-weight: bold;
     color: #C9CCCF;
-  }
-  
-  .post-content {
+}
+
+.post-content {
     font-size: 16px;
     color: #C9CCCF;
-  }
+}
 
-  .post-link {
+.post-link {
     text-decoration: none;
-  }
-  
-  .error {
+}
+
+.post-image {
+    width: 100%;  
+    max-width: 400px; 
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block; /* Делает изображение блочным элементом */
+    margin-left: auto; /* Центрирует изображение */
+    margin-right: auto; /* Центрирует изображение */
+}
+
+.error {
     color: red;
     font-weight: bold;
-  }
-  
+}
