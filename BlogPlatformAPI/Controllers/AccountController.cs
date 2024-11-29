@@ -67,28 +67,7 @@ namespace BlogPlatformAPI.Controllers
             return Ok(new {Token = token});
         }
 
-        // Генерация JWT-токена
-        private string GenerateJwtToken(string username)
-        {
-            var claims = new List<Claim>
-            {
-                new Claim(ClaimTypes.Name, username),
-                //new Claim(ClaimTypes.NameIdentifier, user.Id)
-            };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
-            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-
-            var token = new JwtSecurityToken(
-                issuer: _configuration["JwtSettings:Issuer"],
-                audience: _configuration["JwtSettings:Audience"],
-                claims: claims,
-                expires: DateTime.Now.AddHours(1),
-                signingCredentials: creds
-            );
-
-            return new JwtSecurityTokenHandler().WriteToken(token);
-        }
+        
 
         [Authorize]
         [HttpGet("profile")]
@@ -109,6 +88,25 @@ namespace BlogPlatformAPI.Controllers
 
             return Ok(profileData);
         }
+        [Authorize]
+        [HttpGet("check-login-status")]
+        public IActionResult CheckLoginStatus()
+        {
+            try
+            {
+                if (User.Identity.IsAuthenticated)
+                {
+                    return Ok(new { isLoggedIn = true, username = User.Identity.Name });
+                }
+
+                return Ok(new { isLoggedIn = false });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { Message = "An error occurred while checking login status." });
+            }
+        }
+
 
         [Authorize]
         [HttpPost("upload-avatar")]
@@ -154,6 +152,31 @@ namespace BlogPlatformAPI.Controllers
                 return StatusCode(500, new { Message = "An error occurred while uploading avatar." });
             }
         }
+
+
+        // Генерация JWT-токена
+        private string GenerateJwtToken(string username)
+        {
+            var claims = new List<Claim>
+            {
+                new Claim(ClaimTypes.Name, username),
+                //new Claim(ClaimTypes.NameIdentifier, user.Id)
+            };
+
+            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
+            var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+
+            var token = new JwtSecurityToken(
+                issuer: _configuration["JwtSettings:Issuer"],
+                audience: _configuration["JwtSettings:Audience"],
+                claims: claims,
+                expires: DateTime.Now.AddHours(1),
+                signingCredentials: creds
+            );
+
+            return new JwtSecurityTokenHandler().WriteToken(token);
+        }
+
 
     }
     // DTO для регистрации

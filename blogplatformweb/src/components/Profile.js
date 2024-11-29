@@ -9,8 +9,18 @@ const Profile = () => {
 
   useEffect(() => {
     const fetchProfile = async () => {
+      const token = localStorage.getItem("jwtToken"); // Получаем токен из localStorage
+      if (!token) {
+        setError("Токен отсутствует. Пожалуйста, войдите снова.");
+        return;
+      }
+
       try {
-        const response = await apiClient.get("https://localhost:44357/api/account/profile");
+        const response = await apiClient.get("https://localhost:44357/api/account/profile", {
+          headers: {
+            "Authorization": `Bearer ${token}` // Добавляем токен в заголовок
+          }
+        });
         setProfile(response.data);
       } catch (err) {
         setError("Ошибка загрузки профиля.");
