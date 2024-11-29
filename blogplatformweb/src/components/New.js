@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import apiClient from '../api/apiClient';
-import '../styles/New.css'; 
+import '../styles/New.css';
 
 const New = () => {
   const [posts, setPosts] = useState([]);
@@ -11,14 +11,14 @@ const New = () => {
     const fetchPosts = async () => {
       try {
         const response = await apiClient.get('https://localhost:44357/api/posts');
-        setPosts(response.data);
+        const sortedPosts = response.data.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)); // Сортируем по дате (по убыванию)
+        setPosts(sortedPosts);
       } catch (err) {
         setError('Ошибка загрузки постов');
       }
     };
 
     fetchPosts();
-    
   }, []);
 
   return (
@@ -29,10 +29,10 @@ const New = () => {
         {posts.map((post) => (
           <div key={post.id} className="post-card">
             <Link to={`/post/${post.id}`} className="post-link">
-            <h3 className="post-title">{post.title}</h3>
+              <h3 className="post-title">{post.title}</h3>
             </Link>
-            <p className="post-time">{post.timeAgo}</p> {/* Показываем вычисленное время */}
-
+            <p className="post-time">{post.timeAgo}</p>
+            <p className="post-author">Автор: {post.authorName}</p>
           </div>
         ))}
       </div>

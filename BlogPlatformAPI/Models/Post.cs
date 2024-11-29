@@ -9,6 +9,9 @@ namespace BlogPlatformAPI.Models
         public string Title { get; set; }
         public string Content { get; set; }
         public DateTime CreatedAt { get; set; }
+        public string AuthorId { get; set; }
+        public string AuthorName { get; set; }
+       
         
 
         // Свойство для получения времени, прошедшего с момента создания поста

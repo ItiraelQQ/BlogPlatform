@@ -22,6 +22,8 @@ namespace BlogPlatformAPI.Data
                 entity.Property(p => p.Title).IsRequired().HasMaxLength(200);
                 entity.Property(n => n.Content).IsRequired();
                 entity.Property(n => n.CreatedAt).HasDefaultValueSql("NOW()");
+
+                
             });
         }
     }

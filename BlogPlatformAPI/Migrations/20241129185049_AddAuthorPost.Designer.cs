@@ -3,6 +3,7 @@ using System;
 using BlogPlatformAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogPlatformAPI.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    partial class BlogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241129185049_AddAuthorPost")]
+    partial class AddAuthorPost
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
@@ -120,10 +123,6 @@ namespace BlogPlatformAPI.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("AuthorId")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("AuthorName")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
