@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { FaPencilAlt } from 'react-icons/fa';
 import apiClient from "../api/apiClient";
 import Login from "./Login";
 import Register from "./Register";
@@ -88,19 +89,25 @@ const Navbar = () => {
           <h1>BloGG</h1>
         </div>
         <div className="navbar-links">
-          {isAuthenticated && profile ? (
-            <div className="user-menu">
-              <Link to="/profile">
-                <img
-                  src={`https://localhost:44357${profile.avatarUrl || "/uploads/avatars/default.jpg"}`}
-                  alt="Аватар пользователя"
-                  className="user-avatar"
-                />
-              </Link>
-              <button onClick={handleLogout} className="logout-button">
-                Выйти
-              </button>
-            </div>
+  {isAuthenticated && profile ? (
+    <div className="user-menu">
+      <Link to="/create-post">
+        <button className="create-post-button">
+        <FaPencilAlt style={{marginRight: '10px'}} />
+          Создать пост
+        </button>
+      </Link>
+      <Link to="/profile">
+        <img
+          src={`https://localhost:44357${profile.avatarUrl || "/uploads/avatars/default.jpg"}`}
+          alt="Аватар пользователя"
+          className="user-avatar"
+        />
+      </Link>
+      <button onClick={handleLogout} className="logout-button">
+        Выйти
+      </button>
+    </div>
           ) : (
             <>
               <button onClick={() => setActiveModal("login")} className="nav-link">

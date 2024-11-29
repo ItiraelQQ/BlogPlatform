@@ -23,6 +23,15 @@ namespace BlogPlatformAPI.Controllers
             return await _context.Posts.ToListAsync();
         }
 
+        [HttpGet("{id}")]
+        public async Task<ActionResult<Post>> GetPostById(int id)
+        {
+            return await _context.Posts
+                .Where(post => post.Id == id)
+                .FirstOrDefaultAsync();
+        }
+
+        
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<Post>> CreatePost(Post post)
@@ -31,5 +40,6 @@ namespace BlogPlatformAPI.Controllers
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetPosts), new { id = post.Id }, post);
         }
+
     }
 }

@@ -22,14 +22,18 @@ const Sidebar = () => {
         <h2 className="sidebar-title">Меню</h2>
         <ul className="sidebar-links">
           <li>
+            <Link to="/home">
             <button className="sidebar-button">
               <FaFire style={{marginRight: '10px'}} />
               Популярное</button>
+              </Link>
           </li>
           <li>
+            <Link to="/new">
             <button className="sidebar-button">
               <FaNewspaper style={{marginRight: '10px'}} />
               Новое</button>
+              </Link>
           </li>
         </ul>
       </div>

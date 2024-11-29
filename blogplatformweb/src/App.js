@@ -8,6 +8,9 @@ import Home from './components/Home';
 import Login from './components/Login';
 import Register from './components/Register';
 import Profile from './components/Profile';
+import CreatePost from './components/CreatePost';
+import New from './components/New';
+import PostDetail from './components/PostDetail';
 import '../src/styles/App.css'
 
 const App = () => {
@@ -20,6 +23,9 @@ const App = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/profile" element={<Profile />} />
+        <Route path="/create-post" element={<CreatePost />} />
+        <Route path="/new" element={<New />} />
+        <Route path="/post/:id" element={<PostDetail />} />
       </Routes>
     </Router>
   );
