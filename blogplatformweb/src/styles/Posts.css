@@ -1,0 +1,66 @@
+/* Контейнер для списка постов */
+.posts-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    padding-top: 60px; /* Высота навбара */
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    margin-bottom: 20px;
+  }
+  
+  .error {
+    color: red;
+    font-weight: bold;
+  }
+  
+  .posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 600px;
+    max-width: 800px;
+  }
+  
+  .post-card {
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  }
+  
+  .post-card h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+  }
+  
+  .post-card p {
+    font-size: 1rem;
+    margin: 5px 0;
+  }
+  
+  .post-card div {
+    margin: 10px 0;
+  }
+  
+  /* Можно добавить стиль для изображений, если они есть */
+  .post-card img {
+    max-width: 100%;
+    height: auto;
+  }
+  .post-image {
+    width: 100%;  
+    max-width: 400px; 
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block; /* Делает изображение блочным элементом */
+    margin-left: auto; /* Центрирует изображение */
+    margin-right: auto; /* Центрирует изображение */
+}
+  

@@ -13,7 +13,7 @@ const styles = {
     container: {
         textAlign: 'center',
         padding: '100px 20px',
-        backgroundColor: '#f4f4f4',
+        backgroundColor: 'black',
         minHeight: '100vh',
     },
     title: {

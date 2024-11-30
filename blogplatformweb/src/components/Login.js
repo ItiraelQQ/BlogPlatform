@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import apiClient from '../api/apiClient'; // Adjust based on your api setup
 import { useNavigate } from 'react-router-dom';
+import apiClient from '../api/apiClient'; // Adjust based on your api setup
 
 const Login = ({ onClose }) => {
     const [username, setUsername] = useState('');
@@ -12,9 +12,14 @@ const Login = ({ onClose }) => {
         e.preventDefault();
         try {
             const response = await apiClient.post('https://localhost:44357/api/account/login', { username, password });
-            localStorage.setItem('token', response.data.token);
-            navigate('/profile');
-            onClose();  // Close the modal after successful login
+            
+            if (response.data.token) {
+                localStorage.setItem('jwtToken', response.data.token); 
+                window.location.reload(); 
+                onClose(); 
+            } else {
+                setError('Ошибка входа. Проверьте имя пользователя или пароль.');
+            }
         } catch (err) {
             setError('Ошибка входа. Проверьте имя пользователя или пароль.');
         }
@@ -54,25 +59,26 @@ const styles = {
         padding: '20px',
         textAlign: 'center',
         width: '100%',
-        maxWidth: '400px',  // Ensures modal does not grow too large
+        maxWidth: '400px',
         backgroundColor: '#232324',
         borderRadius: '8px',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
         color: 'white',
-        position: 'relative', // Allows positioning of the close icon
+        position: 'relative',
     },
     header: {
         fontSize: '24px',
+        color: 'white',
         fontWeight: 'bold',
-        marginBottom: '20px',  // Adds spacing below the header
+        marginBottom: '20px',
     },
     error: {
         color: 'red',
-        marginBottom: '10px',  // Adds space between error and form inputs
+        marginBottom: '10px',
     },
     form: {
-        width: '100%',  // Ensure the form spans the full width
-        marginBottom: '15px',  // Adds space below the form
+        width: '100%',
+        marginBottom: '15px',
     },
     input: {
         width: '100%',

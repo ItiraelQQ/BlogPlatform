@@ -11,30 +11,30 @@
     z-index: 10;
 }
 
-.container {
+.navbar-container {
     display: flex;
     justify-content: space-between;
     width: 100%;
     max-width: 1200px;
 }
 
-.brand {
+.navbar-brand {
     margin-right: auto;
 }
 
-.brandText {
+.navbar-brand h1 {
     margin: 0;
     font-size: 22px;
     color: white;
     font-weight: bold;
 }
 
-.links {
+.navbar-links {
     display: flex;
     gap: 20px;
 }
 
-.link {
+.nav-link {
     color: white;
     border: none;
     background-color: #418AF4;
@@ -47,13 +47,65 @@
     cursor: pointer;
 }
 
-.link:hover {
-    background-color: #346ac7;  
-    
+.nav-link:hover {
+    background-color: #346ac7;
 }
 
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Отступы между элементами */
+  }
+  
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s, border-color 0.3s;
+    border: 2px solid white;
+  }
+
+.user-avatar:hover {
+    transform: scale(1.1);
+    border-color: #418AF4;
+}
+
+/* Кнопка выхода */
+.logout-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: color 0.3s;
+    padding: 5px;
+  }
+  
+  .logout-button:hover {
+    color: #346ac7;
+  }
+
+  .create-post-button {
+    background-color: #37383a;
+    border: none;
+    height: 40px;
+    width: 170px;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.3s;
+  }
+  
+  .create-post-button:hover {
+    background-color: #424242;
+  }
+
 /* Модальное окно */
-.overlay {
+.modal-overlay {
     position: fixed;
     top: 0;
     left: 0;

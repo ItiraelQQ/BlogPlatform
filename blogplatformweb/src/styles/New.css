@@ -1,0 +1,67 @@
+.new-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 20px;
+    padding-top: 60px; /* Высота навбара */
+    width: 100%;
+    box-sizing: border-box;
+}
+
+h1 {
+    font-size: 28px;
+    font-weight: bold;
+    color: #C9CCCF;
+    margin-bottom: 20px;
+}
+
+.posts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 600px;
+    max-width: 800px;
+}
+
+.post-card {
+    background-color: #232324;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: center; /* Это центрирует элементы по горизонтали */
+}
+
+.post-title {
+    font-size: 22px;
+    font-weight: bold;
+    color: #C9CCCF;
+}
+
+.post-content {
+    font-size: 16px;
+    color: #C9CCCF;
+}
+
+.post-link {
+    text-decoration: none;
+}
+
+.post-image {
+    width: 100%;  
+    max-width: 400px; 
+    height: auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block; /* Делает изображение блочным элементом */
+    margin-left: auto; /* Центрирует изображение */
+    margin-right: auto; /* Центрирует изображение */
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+}

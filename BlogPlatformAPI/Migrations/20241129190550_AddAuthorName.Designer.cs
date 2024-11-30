@@ -3,6 +3,7 @@ using System;
 using BlogPlatformAPI.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BlogPlatformAPI.Migrations
 {
     [DbContext(typeof(BlogDbContext))]
-    partial class BlogDbContextModelSnapshot : ModelSnapshot
+    [Migration("20241129190550_AddAuthorName")]
+    partial class AddAuthorName
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "9.0.0");
@@ -136,9 +139,6 @@ namespace BlogPlatformAPI.Migrations
                         .HasColumnType("TEXT")
                         .HasDefaultValueSql("NOW()");
 
-                    b.Property<int>("ThemeId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Title")
                         .IsRequired()
                         .HasMaxLength(200)
@@ -146,76 +146,9 @@ namespace BlogPlatformAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ThemeId");
+                    b.HasIndex("AuthorId");
 
                     b.ToTable("Posts");
-                });
-
-            modelBuilder.Entity("BlogPlatformAPI.Models.Theme", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Themes");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "Игры"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Программирование"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Компьютеры"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "Консоли"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Искусство"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            Name = "Кино и сериалы"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            Name = "Музыка"
-                        },
-                        new
-                        {
-                            Id = 8,
-                            Name = "Гайды"
-                        },
-                        new
-                        {
-                            Id = 9,
-                            Name = "Путешествия"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Name = "Аниме"
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -367,13 +300,13 @@ namespace BlogPlatformAPI.Migrations
 
             modelBuilder.Entity("BlogPlatformAPI.Models.Post", b =>
                 {
-                    b.HasOne("BlogPlatformAPI.Models.Theme", "Theme")
+                    b.HasOne("BlogPlatformAPI.Data.ApplicationUser", "Author")
                         .WithMany()
-                        .HasForeignKey("ThemeId")
+                        .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Theme");
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
