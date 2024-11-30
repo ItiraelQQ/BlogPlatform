@@ -34,6 +34,7 @@ const PostDetail = () => {
       />
       <p><strong>Дата создания:</strong> {new Date(post.createdAt).toLocaleDateString()}</p>
       <p><strong>Время создания:</strong> {post.timeAgo}</p>
+      <p><strong>Тема:</strong> {post.theme.name}</p>
     </div>
   );
 };

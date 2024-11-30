@@ -50,6 +50,7 @@ const New = () => {
             
             <p className="post-time">{post.timeAgo}</p>
             <p className="post-author">Автор: {post.authorName}</p>
+            <p className="post-author">Тема: {post.theme.name}</p>
           </div>
         ))}
       </div>

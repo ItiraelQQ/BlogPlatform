@@ -56,6 +56,7 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<BlogDbContext>()
     .AddDefaultTokenProviders();
 
+
 // CORS Policy to Allow Frontend Access
 builder.Services.AddCors(options =>
 {

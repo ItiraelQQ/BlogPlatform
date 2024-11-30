@@ -21,7 +21,9 @@ namespace BlogPlatformAPI.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
         {
-            return await _context.Posts.ToListAsync();
+            return await _context.Posts
+                .Include(p => p.Theme)
+                .ToListAsync();
         }
 
         [HttpGet("{id}")]
@@ -29,8 +31,16 @@ namespace BlogPlatformAPI.Controllers
         {
             return await _context.Posts
                 .Where(post => post.Id == id)
+                .Include(p => p.Theme)
                 .FirstOrDefaultAsync();
         }
+
+        [HttpGet("themes")]
+        public async Task<ActionResult<IEnumerable<Theme>>> GetThemes()
+        {
+            return await _context.Themes.ToListAsync();
+        }
+
         [Authorize]
         [HttpPost]
         public async Task<ActionResult<Post>> CreatePost(Post post)
@@ -57,14 +67,29 @@ namespace BlogPlatformAPI.Controllers
             // Устанавливаем ID автора
             post.AuthorId = author.Id;
 
+            // Проверка на наличие валидной темы
+            if (post.Theme == null || post.Theme.Id == 0 || !await _context.Themes.AnyAsync(t => t.Id == post.Theme.Id))
+            {
+                return BadRequest("Выберите валидную тему.");
+            }
+
+            // Привязываем тему по ID, если тема существует
+            var theme = await _context.Themes.FirstOrDefaultAsync(t => t.Id == post.Theme.Id);
+            if (theme == null)
+            {
+                return BadRequest("Тема не найдена.");
+            }
+
+            // Привязываем тему к посту
+            post.Theme = theme;
+
+            // Добавляем пост в базу данных
             _context.Posts.Add(post);
             await _context.SaveChangesAsync();
 
+            // Возвращаем ответ с созданным постом
             return CreatedAtAction(nameof(GetPosts), new { id = post.Id }, post);
         }
-
-
-
 
 
     }
