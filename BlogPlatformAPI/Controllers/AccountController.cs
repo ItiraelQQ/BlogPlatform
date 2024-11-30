@@ -84,6 +84,7 @@ namespace BlogPlatformAPI.Controllers
             {
                 Username = user.UserName,
                 AvatarUrl = user.AvatarUrl,
+                userId = user.Id,
             };
 
             return Ok(profileData);
@@ -154,14 +155,22 @@ namespace BlogPlatformAPI.Controllers
         }
 
 
-        // Генерация JWT-токена
         private string GenerateJwtToken(string username)
         {
-            var claims = new List<Claim>
+            var user = _userManager.FindByNameAsync(username).Result; // Получаем пользователя по имени
+
+            if (user == null)
             {
-                new Claim(ClaimTypes.Name, username),
-                //new Claim(ClaimTypes.NameIdentifier, user.Id)
-            };
+                throw new UnauthorizedAccessException("User not found.");
+            }
+
+            // Добавляем аватарку пользователя в claims
+            var claims = new List<Claim>
+    {
+        new Claim(ClaimTypes.Name, username),
+        new Claim("AvatarUrl", user.AvatarUrl ?? "/uploads/avatars/default.jpg"),  // Добавляем аватарку в claims
+        new Claim(ClaimTypes.NameIdentifier, user.Id)
+    };
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["JwtSettings:Key"]));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -176,6 +185,7 @@ namespace BlogPlatformAPI.Controllers
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+
 
 
     }

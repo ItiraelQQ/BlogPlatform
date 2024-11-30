@@ -11,7 +11,9 @@ namespace BlogPlatformAPI.Models
         public DateTime CreatedAt { get; set; }
         public string AuthorId { get; set; }
         public string AuthorName { get; set; }
+        public string AuthorAvatarUrl { get; set; }
         public Theme Theme { get; set; }
+        public int Views { get; set; }
        
         
 

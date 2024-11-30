@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import apiClient from "../api/apiClient";
-import "../styles/Profile.css"; // Подключаем стили
+import "../styles/Profile.css"; 
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState(null);
-  const [isUploading, setIsUploading] = useState(false); // Состояние загрузки
+  const [isUploading, setIsUploading] = useState(false); 
 
   useEffect(() => {
     const fetchProfile = async () => {
-      const token = localStorage.getItem("jwtToken"); // Получаем токен из localStorage
+      const token = localStorage.getItem("jwtToken"); 
       if (!token) {
         setError("Токен отсутствует. Пожалуйста, войдите снова.");
         return;
@@ -18,7 +18,7 @@ const Profile = () => {
       try {
         const response = await apiClient.get("https://localhost:44357/api/account/profile", {
           headers: {
-            "Authorization": `Bearer ${token}` // Добавляем токен в заголовок
+            "Authorization": `Bearer ${token}` 
           }
         });
         setProfile(response.data);
@@ -33,9 +33,9 @@ const Profile = () => {
   const handleAvatarUpload = async (event) => {
     const file = event.target.files[0];
     if (file) {
-      setIsUploading(true); // Начало загрузки
+      setIsUploading(true); 
       const formData = new FormData();
-      formData.append("file", file); // Название поля должно совпадать с серверным
+      formData.append("file", file); 
 
       try {
         const response = await apiClient.post("https://localhost:44357/api/account/upload-avatar", formData, {
@@ -43,11 +43,11 @@ const Profile = () => {
             "Content-Type": "multipart/form-data",
           },
         });
-        setProfile({ ...profile, avatarUrl: response.data.avatarUrl }); // Обновляем URL аватарки
+        setProfile({ ...profile, avatarUrl: response.data.avatarUrl }); 
       } catch (err) {
         setError("Ошибка загрузки аватарки.");
       } finally {
-        setIsUploading(false); // Завершение загрузки
+        setIsUploading(false); 
       }
     }
   };

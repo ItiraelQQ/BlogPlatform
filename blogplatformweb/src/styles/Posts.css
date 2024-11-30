@@ -1,66 +1,116 @@
-/* Контейнер для списка постов */
+/* Основной контейнер для постов */
 .posts-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding: 20px;
-    padding-top: 60px; /* Высота навбара */
-    width: 100%;
-    box-sizing: border-box;
-  }
-  
-  h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-  }
-  
-  .error {
-    color: red;
-    font-weight: bold;
-  }
-  
-  .posts-list {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 600px;
-    max-width: 800px;
-  }
-  
-  .post-card {
-    padding: 15px;
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  }
-  
-  .post-card h3 {
-    font-size: 1.5rem;
-    margin-bottom: 10px;
-  }
-  
-  .post-card p {
-    font-size: 1rem;
-    margin: 5px 0;
-  }
-  
-  .post-card div {
-    margin: 10px 0;
-  }
-  
-  /* Можно добавить стиль для изображений, если они есть */
-  .post-card img {
-    max-width: 100%;
-    height: auto;
-  }
-  .post-image {
-    width: 100%;  
-    max-width: 400px; 
-    height: auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    display: block; /* Делает изображение блочным элементом */
-    margin-left: auto; /* Центрирует изображение */
-    margin-right: auto; /* Центрирует изображение */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 20px;
+  padding-top: 60px; 
+  width: 100%;
+  box-sizing: border-box;
 }
-  
+.posts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 600px;
+  max-width: 800px;
+}
+/* Блоки с постами */
+.post-card {
+  background-color: #232324;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок поста */
+.post-header {
+  display: flex;
+  height: 20px;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+/* Информация о пользователе */
+.user-info {
+  display: flex;
+  align-items: center; 
+  gap: 8px;  
+}
+
+.user-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px; 
+  margin-top: -5px; 
+}
+
+.user-name {
+  font-weight: bold;
+  margin: 0;
+}
+
+.user-avatar{
+  border: none;
+}
+
+.user-avatar:hover{
+  transform: none;
+}
+.post-theme {
+  font-size: 0.9rem;
+  color: #777;
+  margin: 0;
+}
+
+/* Метаданные поста */
+.post-meta {
+  text-align: right;
+}
+
+.post-time {
+  font-size: 0.9rem;
+  color: #777;
+}
+
+.post-views {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  color: #333;
+}
+
+/* Тело поста */
+.post-body {
+  margin-top: 10px;
+}
+
+.post-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.post-image {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Ссылки */
+.post-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.post-link:hover .post-title {
+  color: #007bff;
+}
