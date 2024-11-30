@@ -19,11 +19,17 @@ namespace BlogPlatformAPI.Controllers
         }
         
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Post>>> GetPosts()
+        public async Task<ActionResult<IEnumerable<Post>>> GetPosts([FromQuery] int? themeId)
         {
-            return await _context.Posts
-                .Include(p => p.Theme)
-                .ToListAsync();
+            var query = _context.Posts.AsQueryable();
+
+            if (themeId.HasValue)
+            {
+                query = query.Where(p => p.Theme.Id  == themeId.Value);
+            }
+
+            var posts = await query.Include(p => p.Theme).ToListAsync();
+            return Ok(posts);
         }
 
         [HttpGet("{id}")]

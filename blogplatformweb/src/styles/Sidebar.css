@@ -55,6 +55,30 @@
   cursor: pointer;
   z-index: 1001;
 }
+.sidebar-themes {
+  list-style-type: none;
+  padding: 0;
+}
+.sidebar-theme-item {
+  margin-bottom: 5px;
+  
+}
+.sidebar-theme-link {
+  display: block;
+  padding: 10px;
+  color: #C9CCCF;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.sidebar-theme-link:hover {
+  background-color: #202020;
+  border-radius: 10px;
+}
+.theme-icon {
+  margin-right: 10px; 
+  font-size: 20px; 
+}
 
 /* Скрыть боковое меню на маленьких экранах */
 @media (max-width: 768px) {
