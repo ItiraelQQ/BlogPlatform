@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom'; // Для получения ID из URL
-import apiClient from '../api/apiClient'; // Для API-запросов
-import '../styles/PostDetail.css'; // Импорт стилей
+import { useParams } from 'react-router-dom'; 
+import apiClient from '../api/apiClient'; 
+import '../styles/PostDetail.css'; 
 
 const PostDetail = () => {
-  const { id } = useParams(); // Получаем ID поста из URL
+  const { id } = useParams(); 
   const [post, setPost] = useState(null);
   const [error, setError] = useState(null);
 

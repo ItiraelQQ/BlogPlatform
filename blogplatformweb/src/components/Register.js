@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import apiClient from '../api/apiClient'; // Adjust based on your api setup
+import apiClient from '../api/apiClient'; 
 
 const Register = ({ onClose }) => {
     const [username, setUsername] = useState('');
@@ -11,7 +11,7 @@ const Register = ({ onClose }) => {
         e.preventDefault();
         try {
             await apiClient.post('https://localhost:44357/api/account/register', { username, password, email });
-            onClose(); // Close the modal after successful registration
+            onClose(); 
         } catch (err) {
             setError('Ошибка регистрации. Попробуйте снова.');
         }
@@ -58,24 +58,24 @@ const styles = {
         padding: '20px',
         textAlign: 'center',
         width: '100%',
-        maxWidth: '400px',  // Ensures modal does not grow too large
+        maxWidth: '400px',  
         backgroundColor: 'white',
         borderRadius: '8px',
         boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
-        position: 'relative', // Allows positioning of the close icon
+        position: 'relative', 
     },
     header: {
         fontSize: '24px',
         fontWeight: 'bold',
-        marginBottom: '20px',  // Adds spacing below the header
+        marginBottom: '20px',  
     },
     error: {
         color: 'red',
-        marginBottom: '10px',  // Adds space between error and form inputs
+        marginBottom: '10px', 
     },
     form: {
-        width: '100%',  // Ensure the form spans the full width
-        marginBottom: '15px',  // Adds space below the form
+        width: '100%',  
+        marginBottom: '15px',  
     },
     input: {
         width: '100%',

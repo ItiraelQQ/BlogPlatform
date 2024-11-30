@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { FaFire, FaNewspaper, FaGamepad, FaCode, FaLaptop, FaPlaystation, FaPaintBrush, FaFilm, FaMusic, FaBook, FaPlane, FaTv } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
-import apiClient from '../api/apiClient'; // Ваш API клиент
+import apiClient from '../api/apiClient'; 
 import '../styles/Sidebar.css';
 
 const Sidebar = () => {
-  const [isOpen, setIsOpen] = useState(false); // Состояние для открытия/закрытия меню
-  const [themes, setThemes] = useState([]); // Состояние для хранения списка тем
+  const [isOpen, setIsOpen] = useState(false); 
+  const [themes, setThemes] = useState([]); 
 
   const toggleSidebar = () => {
-    setIsOpen(!isOpen); // Переключаем состояние меню
+    setIsOpen(!isOpen); 
   };
 
   useEffect(() => {
-    // Запрос к серверу для получения всех тем
+   
     const fetchThemes = async () => {
       try {
-        const response = await apiClient.get('https://localhost:44357/api/posts/themes'); // Замените URL на ваш реальный
-        setThemes(response.data); // Сохраняем полученные темы в состоянии
+        const response = await apiClient.get('https://localhost:44357/api/posts/themes'); 
+        setThemes(response.data); 
       } catch (err) {
         console.error('Ошибка при загрузке тем:', err);
       }
     };
 
-    fetchThemes(); // Запрос на загрузку тем
+    fetchThemes(); 
   }, []);
 
   // Функция для получения иконки для каждой темы
@@ -55,7 +55,7 @@ const Sidebar = () => {
         <h2 className="sidebar-title">Меню</h2>
         <ul className="sidebar-links">
           <li>
-            <Link to="/home">
+            <Link to="/popular">
               <button className="sidebar-button">
                 <FaFire style={{ marginRight: '10px' }} />
                 Популярное

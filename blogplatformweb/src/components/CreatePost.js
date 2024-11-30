@@ -6,16 +6,15 @@ import '../styles/CreatePost.css';
 
 const CreatePost = () => {
   const [title, setTitle] = useState('');
-  const [content, setContent] = useState(''); // Для HTML-содержимого
-  const [username, setUsername] = useState('');
-  const [userId, setUserId] = useState('');
+  const [content, setContent] = useState(''); 
   const [error, setError] = useState(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [themes, setThemes] = useState([]); // Состояние для хранения списка тем
-  const [selectedThemeId, setSelectedThemeId] = useState(''); // Выбранная тема
+  const [themes, setThemes] = useState([]); 
+  const [selectedThemeId, setSelectedThemeId] = useState(''); 
+  const [user, setUser] = useState(null); 
   const selectedTheme = themes.find(t => t.id === selectedThemeId);
 
-  // Загрузка списка тем
+  // Загрузка списка тем и информации о пользователе
   useEffect(() => {
     const fetchThemes = async () => {
       try {
@@ -31,27 +30,60 @@ const CreatePost = () => {
       }
     };
 
+    const fetchUserProfile = async () => {
+      try {
+        const response = await apiClient.get('https://localhost:44357/api/account/profile', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
+          },
+        });
+  
+        // Сохраняем данные профиля в стейт
+        setUser({
+          username: response.data.username,
+          userId: response.data.userId,
+          avatarUrl: response.data.avatarUrl,
+        });
+  
+        console.log('User profile:', response.data); 
+  
+      } catch (err) {
+        console.error('Ошибка при получении профиля:', err.response?.data || err.message);
+        setError('Не удалось получить данные профиля');
+      }
+    };
     fetchThemes();
+    fetchUserProfile();
   }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsSubmitting(true);
-  
+
+    if (!user) {
+      setError('Пользователь не найден');
+      setIsSubmitting(false);
+      return;
+    }
+
+    // Заполнение данных для поста
     const postData = {
       title,
       content,
       createdAt: new Date().toISOString(),
-      authorName: username,
-      authorId: userId,
+      authorName: user.username,  
+      authorId: user.userId,      
+      authorAvatarUrl: user.avatarUrl, 
       theme: {
-        id: selectedThemeId,  // Передаем объект темы, а не только id
-        name: selectedTheme ? selectedTheme.name : "",  // Получаем название выбранной темы
+        id: selectedThemeId,  
+        name: selectedTheme ? selectedTheme.name : ""  
       },
     };
-  
+    
+    console.log('Post data:', postData);  
+    
     try {
-      await apiClient.post('https://localhost:44357/api/posts', postData, {
+      await apiClient.post('https://localhost:44357/api/posts/create-post', postData, {
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('jwtToken')}`,
           'Content-Type': 'application/json',
@@ -61,11 +93,8 @@ const CreatePost = () => {
     } catch (err) {
       console.error('Ошибка при создании поста:', err.response?.data || err.message);
       setError(err.response?.data?.message || 'Ошибка при создании поста');
-    } finally {
-      setIsSubmitting(false);
     }
   };
-  
 
   return (
     <div className="create-post-container">
