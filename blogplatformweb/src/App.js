@@ -9,6 +9,7 @@ import Profile from './components/Profile';
 import CreatePost from './components/CreatePost';
 import PostDetail from './components/PostDetail';
 import Posts from './components/Posts';  
+import UserProfile from './components/UserProfile';
 import '../src/styles/App.css';
 
 const App = () => {
@@ -26,6 +27,7 @@ const App = () => {
         <Route path="/post/:id" element={<PostDetail />} />
         <Route path="/popular" element={<Posts type="popular" />} />
         <Route path="/posts" element={<Posts type="all" />} />
+        <Route path="/profile/:userId" element={<UserProfile />} />
       </Routes>
     </Router>
   );

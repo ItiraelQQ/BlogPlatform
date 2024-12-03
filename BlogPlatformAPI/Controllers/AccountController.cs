@@ -89,6 +89,28 @@ namespace BlogPlatformAPI.Controllers
 
             return Ok(profileData);
         }
+
+        [HttpGet("profile/{userId}")]
+        public async Task<IActionResult> GetUserProfile(string userId)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                return NotFound(new { Message = "User not found." });
+            }
+
+            var profileData = new
+            {
+                Username = user.UserName,
+                AvatarUrl = user.AvatarUrl,
+                userId = user.Id,
+            };
+
+            return Ok(profileData);
+        }
+
+
         [Authorize]
         [HttpGet("check-login-status")]
         public IActionResult CheckLoginStatus()
@@ -203,5 +225,12 @@ namespace BlogPlatformAPI.Controllers
         public string Password { get; set; }
     }
 
-    
+    public class UserProfile
+    {
+        public string Id { get; set; }
+        public string UserName { get; set; }
+        public string AvatarUrl { get; set; }
+        // public string Bio { get; set; }
+    }
+
 }

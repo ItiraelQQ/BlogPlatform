@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, Link } from 'react-router-dom';
 import apiClient from '../api/apiClient'; 
 import { FaEye, FaComment } from 'react-icons/fa';
 import '../styles/Posts.css'; 
@@ -98,12 +98,13 @@ const Posts = ({ type = 'all' }) => {
               {/* Post Header */}
               <div className="post-header">
                 <div className="user-info">
-                  {/* Аватарка пользователя */}
-                  <img
-                    src={`https://localhost:44357${post.authorAvatarUrl || '/uploads/avatars/default.jpg'}`}
-                    alt={post.authorName || 'Без имени'}
-                    className="user-avatar"
-                  />
+                <Link to={`/profile/${post.authorId}`} className="user-avatar-link">
+                    <img
+                      src={`https://localhost:44357${post.authorAvatarUrl || '/uploads/avatars/default.jpg'}`}
+                      alt={post.authorName || 'Без имени'}
+                      className="user-avatar"
+                    />
+                  </Link>
                   <div className="user-details">
                     <p className="user-name">{post.authorName || 'Неизвестный автор'}</p>
                     <p className="post-theme">{post.theme?.name || 'Без темы'}</p>

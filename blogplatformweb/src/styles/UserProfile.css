@@ -1,0 +1,142 @@
+/* Основной контейнер профиля */
+.user-profile-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    margin-top: 80px;
+    background-color: #232324;
+    border-radius: 8px;
+  }
+  
+  .user-profile-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-bottom: 15px;
+  }
+  
+  .user-profile-avatar {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 20px;
+  }
+  
+  .user-avatar-link {
+    display: inline-block;
+  }
+  
+  .user-profile-header h1 {
+    font-size: 24px;
+    color: #C9CCCF;
+    margin: 0;
+  }
+  
+  .user-profile-header p {
+    font-size: 14px;
+    color: #C9CCCF;
+  }
+  
+  .user-bio {
+    margin-top: 20px;
+  }
+  
+  .user-bio p {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.5;
+  }
+  
+  .user-bio strong {
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .user-posts {
+    margin-top: 40px;
+  }
+  
+  .user-posts h2 {
+    font-size: 20px;
+    color: #333;
+    margin-bottom: 20px;
+  }
+  
+  .user-posts .post-card {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .user-posts .post-card:hover {
+    transform: translateY(-5px);
+  }
+  
+  .user-posts .post-header {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+  }
+  
+  .user-posts .post-title {
+    font-size: 18px;
+    color: #333;
+    text-decoration: none;
+  }
+  
+  .user-posts .post-title:hover {
+    text-decoration: underline;
+  }
+  
+  .user-posts .post-meta {
+    font-size: 14px;
+    color: #777;
+  }
+  
+  .user-posts .post-meta .post-time {
+    margin-right: 15px;
+  }
+  
+  .user-posts .post-meta .post-views {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-posts .post-meta .post-views svg {
+    margin-right: 5px;
+  }
+  
+  /* Обновления для кнопок и ссылок */
+  button, .user-avatar-link {
+    border: none;
+    background: none;
+    cursor: pointer;
+  }
+  
+  button {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: #fff;
+    background-color: #007BFF;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0056b3;
+  }
+  
+  .user-avatar-link {
+    display: inline-block;
+    border-radius: 50%;
+    overflow: hidden;
+  }
+  
+  .user-avatar-link:hover {
+    opacity: 0.8;
+  }
+  
