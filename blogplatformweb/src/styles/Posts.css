@@ -9,6 +9,11 @@
   width: 100%;
   box-sizing: border-box;
 }
+
+h1{
+  color: #C9CCCF;
+}
+
 .posts-list {
   display: flex;
   flex-direction: column;
@@ -79,7 +84,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  color: #333;
+  color: #C9CCCF;
 }
 
 /* Тело поста */
@@ -90,7 +95,7 @@
 .post-title {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #333;
+  color: #C9CCCF;
   margin-bottom: 10px;
 }
 
@@ -105,12 +110,15 @@
   margin-right: auto;
 }
 
+.comment-count {
+  color: #C9CCCF;
+}
+
 /* Ссылки */
 .post-link {
   text-decoration: none;
   color: inherit;
 }
 
-.post-link:hover .post-title {
-  color: #007bff;
-}
+
+

@@ -45,12 +45,23 @@ namespace BlogPlatformAPI.Controllers
                 Content = content,
                 PostedAt = DateTime.UtcNow,
                 UserId = userId,
-                PostId = postId
+                PostId = postId,
+                UserName = User.Identity.Name
             };
 
             _context.Comments.Add(comment);
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetComments), new {postId = comment.PostId}, comment);
+        }
+
+        [HttpGet("{postId}/comments/count")]
+        public async Task<ActionResult<int>> GetCommentCount(int postId)
+        {
+            var commentCount = await _context.Comments
+                .Where(c => c.PostId == postId)
+                .CountAsync();
+
+            return Ok(new {count = commentCount});
         }
     }
 }
