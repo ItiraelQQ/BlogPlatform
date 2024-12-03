@@ -20,7 +20,7 @@ namespace BlogPlatformAPI.Controllers
             _context = context;
             _userManager = userManager;
         }
-        
+
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Post>>> GetPosts([FromQuery] int? themeId)
         {
@@ -28,7 +28,7 @@ namespace BlogPlatformAPI.Controllers
 
             if (themeId.HasValue)
             {
-                query = query.Where(p => p.Theme.Id  == themeId.Value);
+                query = query.Where(p => p.Theme.Id == themeId.Value);
             }
 
             var posts = await query.Include(p => p.Theme).ToListAsync();
@@ -68,9 +68,9 @@ namespace BlogPlatformAPI.Controllers
                         // Устанавливаем cookie, чтобы больше не увеличивать просмотры для этого пользователя
                         Response.Cookies.Append($"post_{id}_viewed", "true", new CookieOptions
                         {
-                            Expires = DateTimeOffset.Now.AddYears(1), 
-                            HttpOnly = true, 
-                            Secure = true 
+                            Expires = DateTimeOffset.Now.AddYears(1),
+                            HttpOnly = true,
+                            Secure = true
                         });
 
                         // Подтверждаем транзакцию
@@ -86,6 +86,22 @@ namespace BlogPlatformAPI.Controllers
             }
 
             return post;
+        }
+
+        [HttpGet("user-posts/{userId}")]
+        public async Task<IActionResult> GetPostsByUserId(string userId)
+        {
+            var posts = await _context.Posts
+                .Where(p => p.AuthorId == userId)
+                .Include(p => p.Theme)
+                .ToListAsync();
+
+            if (posts == null || posts.Count == 0)
+            {
+                return NotFound(new {Message = "Посты не найдены."});
+            }
+
+            return Ok(posts);
         }
 
         [HttpGet("popular")]

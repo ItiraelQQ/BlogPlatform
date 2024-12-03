@@ -27,19 +27,19 @@ namespace BlogPlatformAPI.Models
 
                 if (days > 0)
                 {
-                    return $"{days} дня(ей) назад";
+                    return $"{days}д";
                 }
                 else if (hours > 0)
                 {
-                    return $"{hours} час(ов) назад";
+                    return $"{hours}ч";
                 }
                 else if (minutes > 0)
                 {
-                    return $"{minutes} минут(ы) назад";
+                    return $"{minutes}м";
                 }
                 else
                 {
-                    return $"{seconds} секунд назад";
+                    return $"{seconds}с";
                 }
             }
         }

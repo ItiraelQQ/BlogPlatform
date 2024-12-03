@@ -1,4 +1,4 @@
-/* Основной контейнер профиля */
+/* Контейнер с профилем пользователя */
 .user-profile-container {
     max-width: 600px;
     margin: 0 auto;
@@ -8,11 +8,11 @@
     border-radius: 8px;
   }
   
+  /* Стиль заголовка профиля */
   .user-profile-header {
     display: flex;
     align-items: center;
     margin-bottom: 30px;
-    padding-bottom: 15px;
   }
   
   .user-profile-avatar {
@@ -23,58 +23,34 @@
     margin-right: 20px;
   }
   
-  .user-avatar-link {
-    display: inline-block;
-  }
-  
-  .user-profile-header h1 {
+  h1 {
     font-size: 24px;
     color: #C9CCCF;
     margin: 0;
   }
   
-  .user-profile-header p {
-    font-size: 14px;
-    color: #C9CCCF;
-  }
-  
-  .user-bio {
-    margin-top: 20px;
-  }
-  
-  .user-bio p {
-    font-size: 16px;
-    color: #555;
-    line-height: 1.5;
-  }
-  
-  .user-bio strong {
-    font-weight: bold;
-    color: #333;
-  }
-  
-  .user-posts {
+  /* Контейнер постов пользователя */
+  .user-posts-container {
     margin-top: 40px;
   }
   
-  .user-posts h2 {
+  .user-posts h3 {
     font-size: 20px;
-    color: #333;
+    color: #C9CCCF;
     margin-bottom: 20px;
   }
   
   .user-posts .post-card {
-    background-color: #f9f9f9;
+    background-color: #2e2d2d;
     padding: 20px;
+    max-width: 100%;
     border-radius: 8px;
     margin-bottom: 20px;
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
     transition: transform 0.2s ease-in-out;
   }
   
-  .user-posts .post-card:hover {
-    transform: translateY(-5px);
-  }
+  
   
   .user-posts .post-header {
     display: flex;
@@ -84,7 +60,7 @@
   
   .user-posts .post-title {
     font-size: 18px;
-    color: #333;
+    color: #C9CCCF;
     text-decoration: none;
   }
   
@@ -94,7 +70,7 @@
   
   .user-posts .post-meta {
     font-size: 14px;
-    color: #777;
+    color: #C9CCCF;
   }
   
   .user-posts .post-meta .post-time {
