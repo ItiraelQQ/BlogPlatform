@@ -84,7 +84,7 @@ h1{
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  color: #333;
+  color: #C9CCCF;
 }
 
 /* Тело поста */
@@ -110,10 +110,15 @@ h1{
   margin-right: auto;
 }
 
+.comment-count {
+  color: #C9CCCF;
+}
+
 /* Ссылки */
 .post-link {
   text-decoration: none;
   color: inherit;
 }
+
 
 

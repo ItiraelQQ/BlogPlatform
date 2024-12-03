@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import apiClient from '../api/apiClient'; 
-import { FaEye } from 'react-icons/fa';
+import { FaEye, FaComment } from 'react-icons/fa';
 import '../styles/Posts.css'; 
 
 const Posts = ({ type = 'all' }) => {
@@ -17,6 +17,17 @@ const Posts = ({ type = 'all' }) => {
   const extractFirstImage = (content) => {
     const imgMatch = content.match(/<img[^>]+src="([^">]+)"/);
     return imgMatch ? imgMatch[1] : null;
+  };
+
+  // Функция для получения количества комментариев для каждого поста
+  const fetchCommentCount = async (postId) => {
+    try {
+      const response = await apiClient.get(`https://localhost:44357/api/comments/${postId}/comments/count`);
+      return response.data.count;
+    } catch (err) {
+      console.error("Ошибка при получении количества комментариев", err);
+      return 0;
+    }
   };
 
   // Запрос на получение постов в зависимости от типа
@@ -49,13 +60,15 @@ const Posts = ({ type = 'all' }) => {
       }
 
       // Добавляем первую картинку к каждому посту
-      const postsWithImages = sortedPosts.map((post) => {
+      const postsWithImages = await Promise.all(sortedPosts.map(async (post) => {
         const firstImage = extractFirstImage(post.content);
+        const commentCount = await fetchCommentCount(post.id);  // Получаем количество комментариев
         return {
           ...post,
           firstImage,
+          commentCount,  // Добавляем количество комментариев
         };
-      });
+      }));
 
       setPosts(postsWithImages);
 
@@ -112,6 +125,11 @@ const Posts = ({ type = 'all' }) => {
                 </a>
                 {/* Если первая картинка найдена, отображаем её */}
                 {post.firstImage && <img src={post.firstImage} alt={post.title} className="post-image" />}
+                {/* Отображаем количество комментариев */}
+                <p className="comment-count">
+                  <FaComment style={{ marginRight: '5px' }} /> {/* Добавляем иконку */}
+                  {post.commentCount} 
+                </p>
               </div>
             </div>
           ))

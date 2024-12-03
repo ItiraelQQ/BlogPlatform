@@ -53,5 +53,15 @@ namespace BlogPlatformAPI.Controllers
             await _context.SaveChangesAsync();
             return CreatedAtAction(nameof(GetComments), new {postId = comment.PostId}, comment);
         }
+
+        [HttpGet("{postId}/comments/count")]
+        public async Task<ActionResult<int>> GetCommentCount(int postId)
+        {
+            var commentCount = await _context.Comments
+                .Where(c => c.PostId == postId)
+                .CountAsync();
+
+            return Ok(new {count = commentCount});
+        }
     }
 }
