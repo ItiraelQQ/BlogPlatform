@@ -45,7 +45,8 @@ namespace BlogPlatformAPI.Controllers
                 Content = content,
                 PostedAt = DateTime.UtcNow,
                 UserId = userId,
-                PostId = postId
+                PostId = postId,
+                UserName = User.Identity.Name
             };
 
             _context.Comments.Add(comment);

@@ -9,6 +9,11 @@
   width: 100%;
   box-sizing: border-box;
 }
+
+h1{
+  color: #C9CCCF;
+}
+
 .posts-list {
   display: flex;
   flex-direction: column;
@@ -90,7 +95,7 @@
 .post-title {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #333;
+  color: #C9CCCF;
   margin-bottom: 10px;
 }
 
@@ -111,6 +116,4 @@
   color: inherit;
 }
 
-.post-link:hover .post-title {
-  color: #007bff;
-}
+
