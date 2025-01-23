@@ -9,7 +9,7 @@
 - Тематическая организация статей
 
 ## Используемые технологии
-- **Backend**: ASP.NET, SQLite, EntityFramework
+- **Backend**: .NET 8, SQLite, EntityFramework
 - **Frontend**: React
 
 
